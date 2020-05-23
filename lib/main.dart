@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:permi/services/connectivity_service.dart';
+import 'package:provider/provider.dart';
+
+import 'enums/connectivity_status.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,28 +36,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-
-            Text(
-              'You have pushed the button this many times:',
-            ),
-
-          ],
-        ),
-      ),
-//      floatingActionButton: FloatingActionButton(
-//        onPressed: () {},
-//        tooltip: 'Increment',
-//        child: Icon(Icons.add),
-//      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
+Widget build(BuildContext context) {
+  return StreamProvider<ConnectivityStatus>(
+    builder: (context) => ConnectivityService().connectionStatusController,
+    create: (BuildContext context) {  },
+    child: MaterialApp(
+      title: 'Connectivity Aware UI',
+      theme: ThemeData(
+          textTheme: Theme.of(context)
+              .textTheme
+              .apply(bodyColor: Colors.white, displayColor: Colors.white)),
+      home: HomeView(),
+    ),
+  );
+}
 }
