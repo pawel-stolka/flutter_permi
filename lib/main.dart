@@ -1,4 +1,9 @@
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+
+import 'enums/connectivity_status.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,7 +34,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  StreamSubscription<ConnectivityResult> subscription;
+  ConnectivityStatus _status = ConnectivityStatus.Offline;
+  String status = "Offline";
 
+  initState() {
+    super.initState();
+    subscription = Connectivity().onConnectivityChanged.listen(
+      (ConnectivityResult result) {
+        var _status;
+        if(result == ConnectivityResult.none)
+          _status = 'Offline';
+        if(result == ConnectivityResult.mobile)
+          _status = 'Mobile';
+          if(result == ConnectivityResult.wifi)
+          _status = 'WiFi is not good...';
+        setState(() {
+          status = _status;
+          // status = result.toString();
+          
+        });
+        print("Connection Status has Changed $result");
+    });
+  }
+
+  dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
 
             Text(
-              'You have pushed the button this many times:',
+              'status: $status',
             ),
 
           ],
