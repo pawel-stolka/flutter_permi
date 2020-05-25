@@ -84,25 +84,44 @@ class _MyHomePageState extends State<MyHomePage> {
                   context: context, 
                   title: 'rflutter_alert',
                   desc: 'this is description',
-                  buttons: [
+                  content: Form(
+                    child: Column(
+                      children: <Widget>[
 
-                    DialogButton(
-                      child: Text('My button'),
-                      onPressed: () {
-                        print('my button pressed');
-                        Navigator.pop(context);
-                      },
+                        TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Username"
+                          ),
+                        ),
+
+                        TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Password"
+                          ),
+                        )
+
+                      ],
                     ),
+                  )
+                  // buttons: [
 
-                    DialogButton(
-                      child: Text('My button#2'),
-                      onPressed: () {
-                        print('my button#2 pressed');
-                        Navigator.pop(context);
-                      },
-                    )
+                  //   DialogButton(
+                  //     child: Text('My button'),
+                  //     onPressed: () {
+                  //       print('my button pressed');
+                  //       Navigator.pop(context);
+                  //     },
+                  //   ),
 
-                  ]
+                  //   DialogButton(
+                  //     child: Text('My button#2'),
+                  //     onPressed: () {
+                  //       print('my button#2 pressed');
+                  //       Navigator.pop(context);
+                  //     },
+                  //   )
+
+                  // ]
                 ).show();
               }, 
             )
