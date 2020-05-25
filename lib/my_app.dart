@@ -85,13 +85,23 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: 'rflutter_alert',
                   desc: 'this is description',
                   buttons: [
+
                     DialogButton(
                       child: Text('My button'),
                       onPressed: () {
                         print('my button pressed');
                         Navigator.pop(context);
                       },
+                    ),
+
+                    DialogButton(
+                      child: Text('My button#2'),
+                      onPressed: () {
+                        print('my button#2 pressed');
+                        Navigator.pop(context);
+                      },
                     )
+
                   ]
                 ).show();
               }, 
