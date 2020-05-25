@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'enums/flavor.dart';
 
@@ -75,6 +76,26 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'status: $status',
             ),
+
+            FlatButton(
+              child: Text('Click me'),
+              onPressed: () {
+                Alert(
+                  context: context, 
+                  title: 'rflutter_alert',
+                  desc: 'this is description',
+                  buttons: [
+                    DialogButton(
+                      child: Text('My button'),
+                      onPressed: () {
+                        print('my button pressed');
+                        Navigator.pop(context);
+                      },
+                    )
+                  ]
+                ).show();
+              }, 
+            )
 
           ],
         ),
