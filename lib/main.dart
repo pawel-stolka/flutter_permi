@@ -2,11 +2,15 @@ import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import 'enums/connectivity_status.dart';
+import 'enums/flavor.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Provider<Flavor>.value(
+    value: Flavor.dev,
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -65,9 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final flavor = Provider.of<Flavor>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('$flavor'),
       ),
       body: Center(
         child: Column(
